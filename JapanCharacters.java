@@ -1,0 +1,71 @@
+package gui;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class JapanCharacters {
+	
+	private HashMap<String, ArrayList<String>> dict;
+	
+	public JapanCharacters() {
+		dict = new HashMap<String, ArrayList<String>>();
+		populateDict(dict);
+	}
+	
+	public HashMap<String, ArrayList<String>> getDict() {
+		return dict;
+	}
+	
+	private HashMap<String, ArrayList<String>> populateDict(HashMap<String, ArrayList<String>> dict) {
+		
+		ArrayList<String> au = new ArrayList<String>();
+		au = addToList(au,"あ","い","う","え","お");
+		dict.put("う",au);
+		ArrayList<String> kaku = new ArrayList<String>();
+		kaku = addToList(kaku,"か", "き", "く", "け", "こ");
+		dict.put("く",kaku);
+		ArrayList<String> mamu = new ArrayList<String>();
+		mamu = addToList(mamu, "ま", "み", "む", "め", "も");
+		dict.put("む",mamu);
+		ArrayList<String> sasu = new ArrayList<String>();
+		sasu = addToList(sasu, "さ", "し", "す", "せ", "そ");
+		dict.put("す",sasu);
+		ArrayList<String> tatu = new ArrayList<String>();
+		tatu = addToList(tatu, "た", "ち", "つ", "て", "と");
+		dict.put("つ",tatu);
+		ArrayList<String> hahu = new ArrayList<String>();
+		hahu = addToList(hahu, "は", "ひ", "ふ", "へ", "ほ");
+		dict.put("ふ",hahu);
+		ArrayList<String> babu = new ArrayList<String>();
+		babu = addToList(babu, "ば", "び", "ぶ", "べ", "ぼ");
+		dict.put("ぶ",babu);
+		ArrayList<String> papu = new ArrayList<String>();
+		papu = addToList(papu, "ぱ", "ぴ", "ぷ", "ぺ", "ぽ");
+		dict.put("ぷ",papu);
+		ArrayList<String> dadu = new ArrayList<String>();
+		dadu = addToList(dadu, "だ", "ぢ", "づ", "で", "ど");
+		dict.put("づ",dadu);
+		ArrayList<String> zazu = new ArrayList<String>();
+		zazu = addToList(zazu, "ざ", "じ", "ず", "ぜ", "ぞ");
+		dict.put("ず",zazu);
+		ArrayList<String> gagu = new ArrayList<String>();
+		gagu = addToList(gagu, "が", "ぎ", "ぐ", "げ", "ご");
+		dict.put("ぐ",gagu);
+		ArrayList<String> raru = new ArrayList<String>();
+		zazu = addToList(raru, "ら", "り", "る", "れ", "ろ");
+		dict.put("る",raru);
+			
+		return dict;	
+	}
+	
+	public ArrayList<String> addToList(ArrayList<String> list, String l1, String l2, String l3,
+			String l4, String l5) {
+		list.add(l1);
+		list.add(l2);
+		list.add(l3);
+		list.add(l4);
+		list.add(l5);
+		return list;
+	}
+	
+}
