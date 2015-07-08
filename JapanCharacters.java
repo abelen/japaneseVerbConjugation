@@ -21,6 +21,10 @@ public class JapanCharacters {
 		return dict;
 	}
 	
+	/* Populates the written characters in accordance to letters that start with the 
+	 * same constant. All the letters that start with the same constant is placed into
+	 * an ArrayList and then those ArrayLists are added into the dictionary.
+	 */
 	private HashMap<String, ArrayList<String>> populateDict(HashMap<String, ArrayList<String>> dict) {
 		
 		ArrayList<String> au = new ArrayList<String>();
@@ -63,7 +67,8 @@ public class JapanCharacters {
 		return dict;	
 	}
 	
-	public ArrayList<String> addToList(ArrayList<String> list, String l1, String l2, String l3,
+	
+	private ArrayList<String> addToList(ArrayList<String> list, String l1, String l2, String l3,
 			String l4, String l5) {
 		list.add(l1);
 		list.add(l2);

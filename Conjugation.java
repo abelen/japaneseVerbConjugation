@@ -2,12 +2,15 @@ package gui;
 
 /* Conjugation.java */
 /* Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
+ * Throughout this class, each method goes through and checks to see if the verb is a 
+ * する verb, くる, u-verb, ru-verb and conjugates them accordingly.
  */
 
 import java.util.ArrayList;
 
 public class Conjugation {
 	
+	/* Method that conjugates the masu form of the word */
 	public static String masuForm(String word, JapanCharacters chars) {
 		
 		char[] charsArr = word.toCharArray();
@@ -20,12 +23,9 @@ public class Conjugation {
 			suruWord = suruWord.concat("します");
 			return suruWord;
 			
-		} else if (checkKuruVerb(word)){
-			
+		} else if (checkKuruVerb(word)){	
 			return "きます";
-		
 		} else if (checkRuVerb(word)){
-			
 			String ruWord = word.substring(0, word.length() - 1);
 			ruWord = ruWord.concat("ます");
 			return ruWord;
@@ -50,12 +50,16 @@ public class Conjugation {
 		return newWord;
 	}
 	
+	/* The helper method that is called in able to create the Te form of the verb. */
 	public static String teHelper(String word, JapanCharacters chars) {
 		String newWord = makeTeTa(word, chars);
 		newWord = newWord.concat(addTe(word,chars));
 		return newWord;
 	}
 	
+	/* The combined method that is used in able to conjugate the common prefix that are used 
+	 * by the te and the past form of the verb.
+	 */
 	private static String makeTeTa(String word, JapanCharacters chars) {
 				
 		char[] charsArr = word.toCharArray();
@@ -67,15 +71,11 @@ public class Conjugation {
 			return suruWord;
 			
 		} else if (checkKuruVerb(word)){
-			
 			return "き";
-		
 		} else if (checkRuVerb(word)){
 			String ruWord = word.substring(0, word.length() - 1);
 			return ruWord;
-			
 		} else {
-		
 			String newWord = new String(word.substring(0, word.length() - 1));
 			if (word.charAt(word.length() - 1) == 'う' ||
 					word.charAt(word.length() - 1) == 'る' ||
@@ -97,6 +97,9 @@ public class Conjugation {
 		}
 	}
 	
+	/* Adds the last bit of the te form to the verb in accordance to the Japanese 
+	 * rules of conjugating verbs.
+	 */
 	private static String addTe(String word, 
 			JapanCharacters chars) {
 	
@@ -106,6 +109,7 @@ public class Conjugation {
 				word.charAt(word.length() - 1) == 'く')) {	
 			return "て";
 		} else  {
+			/* if the verb is ends in ぐ */
 			return "で";
 		}
 	}
@@ -137,6 +141,8 @@ public class Conjugation {
 		return newWord;
 	}
 	
+	/* Method that conjugates the common prefix of the negative form and the past
+	 * negative form */
 	public static String preNegForm(String word, JapanCharacters chars) {
 		
 		char[] charsArr = word.toCharArray();
@@ -150,11 +156,8 @@ public class Conjugation {
 			return suruWord;
 			
 		} else if (checkKuruVerb(word)){
-			
 			return "きな";
-		
 		} else if (checkRuVerb(word)){
-			
 			String ruWord = word.substring(0, word.length() - 1);
 			ruWord = ruWord.concat("な");
 			return ruWord;
@@ -226,7 +229,7 @@ public class Conjugation {
 		/* to conjugate a suru verb */
 		if (checkSuruVerb(word)) {
 			String suruWord = word.substring(0, word.length() - 2);
-			suruWord = suruWord.concat("される");
+			suruWord = suruWord.concat("させる");
 			return suruWord;
 			
 		} else if (checkKuruVerb(word)){
@@ -286,17 +289,82 @@ public class Conjugation {
 			for (int i = 0; i < charsArr.length-1; i++) {
 				masuWord = masuWord.concat(Character.toString(charsArr[i]));
 			}
-			//if (checkUVerb(word)) {
-				//masuWord = masuWord.concat("わ");
-			//} else {
 			masuWord = masuWord.concat(table.get(3));
-			//}
 			masuWord = masuWord.concat("る");
 			return masuWord;	
 		}
 		
 	}
 	
+	public static String getTaiForm(String word, JapanCharacters chars) {
+		
+		char[] charsArr = word.toCharArray();
+		String masuWord = "";
+		ArrayList<String> table;
+		
+		/* to conjugate a suru verb */
+		if (checkSuruVerb(word)) {
+			String suruWord = word.substring(0, word.length() - 2);
+			suruWord = suruWord.concat("したい");
+			return suruWord;
+			
+		} else if (checkKuruVerb(word)){	
+			return "きたい";
+		} else if (checkRuVerb(word)){
+			String ruWord = word.substring(0, word.length() - 1);
+			ruWord = ruWord.concat("たい");
+			return ruWord;
+			
+		} else {
+		
+			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+		
+			for (int i = 0; i < charsArr.length-1; i++) {
+				masuWord = masuWord.concat(Character.toString(charsArr[i]));
+			}
+			masuWord = masuWord.concat(table.get(1));
+			masuWord = masuWord.concat("たい");
+			return masuWord;	
+		}
+		
+	}
+	
+	public static String getConditional(String word, JapanCharacters chars) {
+		
+		char[] charsArr = word.toCharArray();
+		String masuWord = "";
+		ArrayList<String> table;
+		
+		/* to conjugate a suru verb */
+		if (checkSuruVerb(word)) {
+			String suruWord = word.substring(0, word.length() - 2);
+			suruWord = suruWord.concat("すれば");
+			return suruWord;
+			
+		} else if (checkKuruVerb(word)){
+			
+			return "来れば";
+		
+		} else if (checkRuVerb(word)){
+			
+			String ruWord = word.substring(0, word.length() - 1);
+			ruWord = ruWord.concat("れば");
+			return ruWord;
+			
+		} else {
+		
+			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+		
+			for (int i = 0; i < charsArr.length-1; i++) {
+				masuWord = masuWord.concat(Character.toString(charsArr[i]));
+			}
+			masuWord = masuWord.concat(table.get(3));
+			masuWord = masuWord.concat("ば");
+			return masuWord;	
+		}
+		
+	}
+		
 	private static boolean checkSuruVerb(String word) {
 		
 		if ( (word.equals("する") ) || (word.substring(word.length() - 2, word.length()).equals("する")) ) {
