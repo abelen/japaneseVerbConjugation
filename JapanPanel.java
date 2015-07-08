@@ -1,12 +1,18 @@
 package gui;
 
 import java.awt.*;
+
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+/* JapanPanel.java */
+/* The class that contains the Listener that responds to the user events when 
+ * they enter in the word and then hit enter on the keyboard. 
+ */
 
 public class JapanPanel extends JPanel {
 	
@@ -23,7 +29,6 @@ public class JapanPanel extends JPanel {
 	private JLabel jpnNegTitle;
 	private JLabel jpnNegPast;
 	private JLabel jpnNegPastTitle;
-	private Image backgroundImage; 
 	private JLabel jpnPotentialForm;
 	private JLabel jpnPotTitle;
 	private JLabel jpnPassiveTitle;
@@ -90,6 +95,9 @@ public class JapanPanel extends JPanel {
 			jpnTe.setText(Conjugation.teHelper(jpnText.getText(), chars));
 			jpnNeg.setText(Conjugation.getNegForm(jpnText.getText(), chars));
 			jpnNegPast.setText(Conjugation.getNegPastForm(jpnText.getText(), chars));
+			jpnPassive.setText(Conjugation.getPassive(jpnText.getText(), chars));
+			jpnCausative.setText(Conjugation.getCausative(jpnText.getText(), chars));
+			jpnPotentialForm.setText(Conjugation.getPotential(jpnText.getText(), chars));
 			
 		}		
 	}

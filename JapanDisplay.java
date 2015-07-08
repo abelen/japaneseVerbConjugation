@@ -1,5 +1,10 @@
 package gui;
 
+/* JapanDisplay.java */
+/* Part of the program that displays the GUI interface that the user
+ * interacts with. 
+ */
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -14,8 +19,6 @@ public class JapanDisplay {
 		
 		JFrame frame = new JFrame("Japanese Text");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//Image backgroundImage = ImageIO.read(new File("/Users/anthonybelen/Documents/japan_background.jpg"));
-		
 		
 		JapanPanel panel = new JapanPanel();
 		frame.getContentPane().add(panel);
@@ -24,9 +27,5 @@ public class JapanDisplay {
 		frame.setVisible(true);
 	}
 	
-	/*public void paint(Graphics g) {
-		super.paint(g);
-		g.drawImage(backgroundImage, 0, 0, null);
-	}*/
 
 }

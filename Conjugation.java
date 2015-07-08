@@ -1,5 +1,9 @@
 package gui;
 
+/* Conjugation.java */
+/* Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
+ */
+
 import java.util.ArrayList;
 
 public class Conjugation {
@@ -162,14 +166,136 @@ public class Conjugation {
 			for (int i = 0; i < charsArr.length-1; i++) {
 				masuWord = masuWord.concat(Character.toString(charsArr[i]));
 			}
-			masuWord = masuWord.concat(table.get(0));
+			if (checkUVerb(word)) {
+				masuWord = masuWord.concat("わ");
+			} else {
+				masuWord = masuWord.concat(table.get(0));
+			}
 			masuWord = masuWord.concat("な");
 			return masuWord;	
 		}
 		
 	}
-		
 	
+	public static String getPassive(String word, JapanCharacters chars) {
+		
+		char[] charsArr = word.toCharArray();
+		String masuWord = "";
+		ArrayList<String> table;
+		
+		/* to conjugate a suru verb */
+		if (checkSuruVerb(word)) {
+			String suruWord = word.substring(0, word.length() - 2);
+			suruWord = suruWord.concat("される");
+			return suruWord;
+			
+		} else if (checkKuruVerb(word)){
+			
+			return "来される";
+		
+		} else if (checkRuVerb(word)){
+			
+			String ruWord = word.substring(0, word.length() - 1);
+			ruWord = ruWord.concat("される");
+			return ruWord;
+			
+		} else {
+		
+			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+		
+			for (int i = 0; i < charsArr.length-1; i++) {
+				masuWord = masuWord.concat(Character.toString(charsArr[i]));
+			}
+			if (checkUVerb(word)) {
+				masuWord = masuWord.concat("わ");
+			} else {
+				masuWord = masuWord.concat(table.get(0));
+			}
+			masuWord = masuWord.concat("れる");
+			return masuWord;	
+		}
+		
+	}
+	
+	public static String getCausative(String word, JapanCharacters chars) {
+		
+		char[] charsArr = word.toCharArray();
+		String masuWord = "";
+		ArrayList<String> table;
+		
+		/* to conjugate a suru verb */
+		if (checkSuruVerb(word)) {
+			String suruWord = word.substring(0, word.length() - 2);
+			suruWord = suruWord.concat("される");
+			return suruWord;
+			
+		} else if (checkKuruVerb(word)){
+			
+			return "来させる";
+		
+		} else if (checkRuVerb(word)){
+			
+			String ruWord = word.substring(0, word.length() - 1);
+			ruWord = ruWord.concat("させる");
+			return ruWord;
+			
+		} else {
+		
+			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+		
+			for (int i = 0; i < charsArr.length-1; i++) {
+				masuWord = masuWord.concat(Character.toString(charsArr[i]));
+			}
+			if (checkUVerb(word)) {
+				masuWord = masuWord.concat("わ");
+			} else {
+				masuWord = masuWord.concat(table.get(0));
+			}
+			masuWord = masuWord.concat("せる");
+			return masuWord;	
+		}
+		
+	}
+		
+	public static String getPotential(String word, JapanCharacters chars) {
+		
+		char[] charsArr = word.toCharArray();
+		String masuWord = "";
+		ArrayList<String> table;
+		
+		/* to conjugate a suru verb */
+		if (checkSuruVerb(word)) {
+			String suruWord = word.substring(0, word.length() - 2);
+			suruWord = suruWord.concat("できる");
+			return suruWord;
+			
+		} else if (checkKuruVerb(word)){
+			
+			return "来られる";
+		
+		} else if (checkRuVerb(word)){
+			
+			String ruWord = word.substring(0, word.length() - 1);
+			ruWord = ruWord.concat("られる");
+			return ruWord;
+			
+		} else {
+		
+			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+		
+			for (int i = 0; i < charsArr.length-1; i++) {
+				masuWord = masuWord.concat(Character.toString(charsArr[i]));
+			}
+			//if (checkUVerb(word)) {
+				//masuWord = masuWord.concat("わ");
+			//} else {
+			masuWord = masuWord.concat(table.get(3));
+			//}
+			masuWord = masuWord.concat("る");
+			return masuWord;	
+		}
+		
+	}
 	
 	private static boolean checkSuruVerb(String word) {
 		
@@ -188,6 +314,14 @@ public class Conjugation {
 			return false;
 		}
 		
+	}
+	
+	private static boolean checkUVerb(String word) {
+		if (word.substring(word.length() - 1, word.length()).equals("う")) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	private static boolean checkRuVerb(String word) {

@@ -1,5 +1,10 @@
 package gui;
 
+/* JapanCharacters.java */
+/* A data dictionary that keeps track of all the different characters in the Japanese 
+ * written language. 
+ */
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
