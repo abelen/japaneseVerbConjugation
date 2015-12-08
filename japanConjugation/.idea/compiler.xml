@@ -22,11 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="japanConjugation" />
+        <module name="conjugation" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="japanConjugation" target="1.5" />
+      <module name="conjugation" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

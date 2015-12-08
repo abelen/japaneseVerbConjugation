@@ -1,7 +1,7 @@
-package gui;
+package conjugation;
 
-/* JapanCharacters.java */
-/* A data dictionary that keeps track of all the different characters in the Japanese 
+/**
+ * A data dictionary that keeps track of all the different characters in the Japanese
  * written language. 
  */
 

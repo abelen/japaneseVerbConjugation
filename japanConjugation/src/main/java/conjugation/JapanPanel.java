@@ -1,12 +1,9 @@
-package gui;
+package conjugation;
 
 import java.awt.*;
-
 import java.awt.event.*;
-import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /* JapanPanel.java */
@@ -34,9 +31,9 @@ public class JapanPanel extends JPanel {
 		setBackground(Color.RED);
 		
 	}
-	
+
+	/* Inner class that uses to get the panel that holds all the conjugations */
 	class ConjugationPanel extends JPanel {
-		
 		private JLabel jpnMasu;
 		private JLabel jpnMasuTitle;
 		private JLabel jpnPast;
@@ -58,9 +55,7 @@ public class JapanPanel extends JPanel {
 		private JLabel jpnTaiFormTitle;
 		private JLabel jpnCondForm;
 		private JLabel jpnCondFormTitle;
-		
-		
-		
+
 		public ConjugationPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			jpnText = new JTextField(10);
@@ -113,7 +108,6 @@ public class JapanPanel extends JPanel {
 		private class TextListener implements ActionListener {
 			
 			public void actionPerformed(ActionEvent event) {
-				
 				jpnMasu.setText(Conjugation.masuForm(jpnText.getText(),chars));
 				jpnPast.setText(Conjugation.taHelper(jpnText.getText(), chars));
 				jpnTe.setText(Conjugation.teHelper(jpnText.getText(), chars));
@@ -127,8 +121,5 @@ public class JapanPanel extends JPanel {
 				
 			}		
 		}
-		
 	}
-	
-	
 }
