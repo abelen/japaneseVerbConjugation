@@ -2,12 +2,13 @@ package conjugation;
 
 import java.awt.*;
 import java.awt.event.*;
+
 import java.io.IOException;
 
 import javax.swing.*;
 
-/* JapanPanel.java */
-/* The class that contains the Listener that responds to the user events when 
+/**
+ * The class that contains the Listener that responds to the user events when
  * they enter in the word and then hit enter on the keyboard. 
  */
 
@@ -16,8 +17,11 @@ public class JapanPanel extends JPanel {
 	private JLabel enterLabel;
 	private JapanCharacters chars;
 	private ConjugationPanel conjugationPanel;
-	
-	
+
+    /**
+     * Default constructor.
+     * @throws IOException
+     */
 	public JapanPanel() throws IOException {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		chars = new JapanCharacters();
@@ -104,7 +108,10 @@ public class JapanPanel extends JPanel {
 			add(jpnCondFormTitle);
 			add(jpnCondForm);
 		}
-		
+
+        /**
+         * Inner class that will be used to listen for when a user enters a Japanese word.
+         */
 		private class TextListener implements ActionListener {
 			
 			public void actionPerformed(ActionEvent event) {
@@ -118,7 +125,6 @@ public class JapanPanel extends JPanel {
 				jpnPotentialForm.setText(Conjugation.getPotential(jpnText.getText(), chars));
 				jpnTaiForm.setText(Conjugation.getTaiForm(jpnText.getText(), chars));
 				jpnCondForm.setText(Conjugation.getConditional(jpnText.getText(), chars));
-				
 			}		
 		}
 	}

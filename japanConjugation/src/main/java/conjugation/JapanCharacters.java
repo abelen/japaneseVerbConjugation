@@ -5,13 +5,15 @@ package conjugation;
  * written language. 
  */
 
+import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+@Named
 public class JapanCharacters {
 	
 	private HashMap<String, ArrayList<String>> dict;
-	
+
 	public JapanCharacters() {
 		dict = new HashMap<String, ArrayList<String>>();
 		populateDict(dict);
@@ -66,8 +68,7 @@ public class JapanCharacters {
 			
 		return dict;	
 	}
-	
-	
+
 	private ArrayList<String> addToList(ArrayList<String> list, String l1, String l2, String l3,
 			String l4, String l5) {
 		list.add(l1);
@@ -77,5 +78,4 @@ public class JapanCharacters {
 		list.add(l5);
 		return list;
 	}
-	
 }

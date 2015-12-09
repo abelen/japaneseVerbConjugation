@@ -1,7 +1,6 @@
 package conjugation;
 
-/* Conjugation.java */
-/* Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
+/** Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
  * Throughout this class, each method goes through and checks to see if the verb is a 
  * する verb, くる, u-verb, ru-verb and conjugates them accordingly.
  */
