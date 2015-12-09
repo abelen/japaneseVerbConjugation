@@ -5,6 +5,8 @@ import java.awt.event.*;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.swing.*;
 
 /**
@@ -12,11 +14,39 @@ import javax.swing.*;
  * they enter in the word and then hit enter on the keyboard. 
  */
 
+@Named
 public class JapanPanel extends JPanel {
 	
 	private JLabel enterLabel;
+
+    @Inject
 	private JapanCharacters chars;
-	private ConjugationPanel conjugationPanel;
+
+    public JLabel getEnterLabel() {
+        return enterLabel;
+    }
+
+    public void setEnterLabel(JLabel enterLabel) {
+        this.enterLabel = enterLabel;
+    }
+
+    public JapanCharacters getChars() {
+        return chars;
+    }
+
+    public void setChars(JapanCharacters chars) {
+        this.chars = chars;
+    }
+
+    public ConjugationPanel getConjugationPanel() {
+        return conjugationPanel;
+    }
+
+    public void setConjugationPanel(ConjugationPanel conjugationPanel) {
+        this.conjugationPanel = conjugationPanel;
+    }
+
+    private ConjugationPanel conjugationPanel;
 
     /**
      * Default constructor.
@@ -27,18 +57,19 @@ public class JapanPanel extends JPanel {
 		chars = new JapanCharacters();
 		conjugationPanel = new ConjugationPanel();
 		
-		enterLabel = new JLabel("Enter the dictionary form of the verb in kanji and hiragana.");
+		enterLabel = new JLabel("Enter the dictionary form of the verb in kanji or hiragana.");
 		add(enterLabel);
 		add(conjugationPanel);
 		
-		setPreferredSize(new Dimension(300,370));
+		setPreferredSize(new Dimension(400,370));
 		setBackground(Color.RED);
 		
 	}
 
 	/* Inner class that uses to get the panel that holds all the conjugations */
 	class ConjugationPanel extends JPanel {
-		private JLabel jpnMasu;
+        private JTextField jpnText;
+        private JLabel jpnMasu;
 		private JLabel jpnMasuTitle;
 		private JLabel jpnPast;
 		private JLabel jpnPastTitle;
@@ -54,12 +85,15 @@ public class JapanPanel extends JPanel {
 		private JLabel jpnPassive;
 		private JLabel jpnCausativeTitle;
 		private JLabel jpnCausative;
-		private JTextField jpnText;
 		private JLabel jpnTaiForm;
 		private JLabel jpnTaiFormTitle;
 		private JLabel jpnCondForm;
 		private JLabel jpnCondFormTitle;
 
+        /**
+         * Default constructor that is setup the conjugation panel with its
+         * default values.
+         */
 		public ConjugationPanel() {
 			setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 			jpnText = new JTextField(10);
@@ -113,11 +147,10 @@ public class JapanPanel extends JPanel {
          * Inner class that will be used to listen for when a user enters a Japanese word.
          */
 		private class TextListener implements ActionListener {
-			
 			public void actionPerformed(ActionEvent event) {
 				jpnMasu.setText(Conjugation.masuForm(jpnText.getText(),chars));
-				jpnPast.setText(Conjugation.taHelper(jpnText.getText(), chars));
-				jpnTe.setText(Conjugation.teHelper(jpnText.getText(), chars));
+				jpnPast.setText(Conjugation.makeTe(jpnText.getText(), chars));
+				jpnTe.setText(Conjugation.makeTa(jpnText.getText(), chars));
 				jpnNeg.setText(Conjugation.getNegForm(jpnText.getText(), chars));
 				jpnNegPast.setText(Conjugation.getNegPastForm(jpnText.getText(), chars));
 				jpnPassive.setText(Conjugation.getPassive(jpnText.getText(), chars));

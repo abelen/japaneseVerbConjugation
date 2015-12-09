@@ -64,42 +64,6 @@ public class Conjugation {
 		newWord = newWord.concat("かった");
 		return newWord;
 	}
-	
-	/* Method that conjugates the common prefix of the negative form and the past
-	 * negative form */
-	private static String preNegForm(String word, JapanCharacters chars) {
-		char[] charsArr = word.toCharArray();
-		String masuWord = "";
-		ArrayList<String> table;
-		
-		/* to conjugate a suru verb */
-		if (checkSuruVerb(word)) {
-			String suruWord = word.substring(0, word.length() - 2);
-			suruWord = suruWord.concat("しな");
-			return suruWord;
-			
-		} else if (checkKuruVerb(word)){
-			return "きな";
-		} else if (checkRuVerb(word)){
-			String ruWord = word.substring(0, word.length() - 1);
-			ruWord = ruWord.concat("な");
-			return ruWord;
-		} else {
-			table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
-		
-			for (int i = 0; i < charsArr.length-1; i++) {
-				masuWord = masuWord.concat(Character.toString(charsArr[i]));
-			}
-			if (checkUVerb(word)) {
-				masuWord = masuWord.concat("わ");
-			} else {
-				masuWord = masuWord.concat(table.get(0));
-			}
-			masuWord = masuWord.concat("な");
-			return masuWord;	
-		}
-		
-	}
 
 	/**
 	 * Returns the passive form of the verb.
@@ -109,7 +73,6 @@ public class Conjugation {
 	 * @return The passive form of the verb.
 	 */
 	public static String getPassive(String word, JapanCharacters chars) {
-		
 		char[] charsArr = word.toCharArray();
 		String masuWord = "";
 		ArrayList<String> table;
@@ -178,7 +141,6 @@ public class Conjugation {
 			masuWord = masuWord.concat("せる");
 			return masuWord;	
 		}
-		
 	}
 
 	/**
@@ -201,11 +163,8 @@ public class Conjugation {
 			return suruWord;
 			
 		} else if (checkKuruVerb(word)){
-			
 			return "来られる";
-		
 		} else if (checkRuVerb(word)){
-			
 			String ruWord = word.substring(0, word.length() - 1);
 			ruWord = ruWord.concat("られる");
 			return ruWord;
@@ -275,7 +234,7 @@ public class Conjugation {
 			String suruWord = word.substring(0, word.length() - 2);
 			suruWord = suruWord.concat("すれば");
 			return suruWord;
-		} else if (checkKuruVerb(word)){
+		} else if (checkKuruVerb(word)) {
 			return "来れば";
 		} else if (checkRuVerb(word)){
 			String ruWord = word.substring(0, word.length() - 1);
@@ -293,15 +252,47 @@ public class Conjugation {
 			return masuWord;	
 		}
 	}
-		
-	private static boolean checkSuruVerb(String word) {
+
+    /**
+     * Returns the te form of the verb.
+     *
+     * @param word The Japanese word to be conjugated.
+     * @param chars The Japanese characters dictionary.
+     * @return The Te form of the verb.
+     */
+    public static String makeTe(String word, JapanCharacters chars) {
+        String newWord = makeTeTa(word, chars);
+        newWord = newWord.concat(addTa(word,chars));
+        return newWord;
+    }
+
+    /**
+     * Returns the Ta form of the verb.
+     *
+     * @param word The Japanese word to be conjugated.
+     * @param chars The Japanese Characters dictionary.
+     * @return The Ta form of the verb.
+     */
+    public static String makeTa(String word, JapanCharacters chars) {
+        String newWord = makeTeTa(word, chars);
+        newWord = newWord.concat(addTe(word,chars));
+        return newWord;
+    }
+
+    /*
+     * Helper function to check if its a suru verb.
+     */
+    private static boolean checkSuruVerb(String word) {
 		if ( (word.equals("する") ) || (word.substring(word.length() - 2, word.length()).equals("する")) ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
+    /*
+     * Helper function to check if its kuru.
+     */
 	private static boolean checkKuruVerb(String word) {
 		if (word.equals("くる") || (word.equals("来る"))) {
 			return true;
@@ -309,7 +300,10 @@ public class Conjugation {
 			return false;
 		}
 	}
-	
+
+    /*
+     * Helper function that is used to check to see if it's a u verb.
+     */
 	private static boolean checkUVerb(String word) {
 		if (word.substring(word.length() - 1, word.length()).equals("う")) {
 			return true;
@@ -317,6 +311,10 @@ public class Conjugation {
 			return false;
 		}
 	}
+
+    /*
+     * Helper function that is used to check to see if it's a ru verb.
+     */
 	private static boolean checkRuVerb(String word) {
 		if (word.substring(word.length() - 2, 
 				word.length()).equals("べる") || 
@@ -333,19 +331,6 @@ public class Conjugation {
 		} else {
 			return false;
 		}
-	}
-	/* The helper method that is called in able to create the ta form of the verb. */
-	public static String taHelper(String word, JapanCharacters chars) {
-		String newWord = makeTeTa(word, chars);
-		newWord = newWord.concat(addTa(word,chars));
-		return newWord;
-	}
-
-	/* The helper method that is called in able to create the Te form of the verb. */
-	public static String teHelper(String word, JapanCharacters chars) {
-		String newWord = makeTeTa(word, chars);
-		newWord = newWord.concat(addTe(word,chars));
-		return newWord;
 	}
 
 	/* The combined method that is used in able to conjugate the common prefix that are used
@@ -414,4 +399,39 @@ public class Conjugation {
 			return "だ";
 		}
 	}
+
+    /* Method that conjugates the common prefix of the negative form and the past
+    * negative form */
+    private static String preNegForm(String word, JapanCharacters chars) {
+        char[] charsArr = word.toCharArray();
+        String masuWord = "";
+        ArrayList<String> table;
+
+		/* to conjugate a suru verb */
+        if (checkSuruVerb(word)) {
+            String suruWord = word.substring(0, word.length() - 2);
+            suruWord = suruWord.concat("しな");
+            return suruWord;
+
+        } else if (checkKuruVerb(word)){
+            return "きな";
+        } else if (checkRuVerb(word)){
+            String ruWord = word.substring(0, word.length() - 1);
+            ruWord = ruWord.concat("な");
+            return ruWord;
+        } else {
+            table = chars.getDict().get(Character.toString(charsArr[charsArr.length-1]));
+
+            for (int i = 0; i < charsArr.length-1; i++) {
+                masuWord = masuWord.concat(Character.toString(charsArr[i]));
+            }
+            if (checkUVerb(word)) {
+                masuWord = masuWord.concat("わ");
+            } else {
+                masuWord = masuWord.concat(table.get(0));
+            }
+            masuWord = masuWord.concat("な");
+            return masuWord;
+        }
+    }
 }

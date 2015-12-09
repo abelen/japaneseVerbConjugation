@@ -4,16 +4,24 @@ package conjugation;
  * interacts with. Contains all the front end stuff.
  */
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import java.io.IOException;
 import javax.swing.JFrame;
 
 public class JapanDisplay {
 	
 	public static void main(String[] args) throws IOException {
+
+        // TODO: Need to do data validation.
+        // TODO: Add shutdown hook and postinitalization
+        ApplicationContext context = new ClassPathXmlApplicationContext("configuration.xml");
+
 		JFrame frame = new JFrame("Japanese Text");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		JapanPanel panel = new JapanPanel();
+
+        JapanPanel panel = (JapanPanel) context.getBean("japanPanel");
 		frame.getContentPane().add(panel);
 		
 		frame.pack();
