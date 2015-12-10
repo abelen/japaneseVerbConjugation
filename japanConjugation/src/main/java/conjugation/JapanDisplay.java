@@ -23,7 +23,8 @@ public class JapanDisplay {
 
         JapanPanel panel = (JapanPanel) context.getBean("japanPanel");
 		frame.getContentPane().add(panel);
-		
+
+        // set the gui to be visible.
 		frame.pack();
 		frame.setVisible(true);
 	}

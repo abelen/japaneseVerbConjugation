@@ -1,6 +1,7 @@
 package conjugation;
 
-/** Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
+/**
+ * Handles the heavy lifting of doing the conjugations of the different Japanese verbs.
  * Throughout this class, each method goes through and checks to see if the verb is a 
  * する verb, くる, u-verb, ru-verb and conjugates them accordingly.
  */
@@ -182,7 +183,7 @@ public class Conjugation {
 	}
 
 	/**
-	 * Returns the たい form of the verb.
+	 * Returns the tai form of the verb.
 	 *
 	 * @param word The japanese word to be conjugated.
 	 * @param chars The Japanese characters dictionary.
@@ -260,7 +261,7 @@ public class Conjugation {
      * @param chars The Japanese characters dictionary.
      * @return The Te form of the verb.
      */
-    public static String makeTe(String word, JapanCharacters chars) {
+    public static String getTe(String word, JapanCharacters chars) {
         String newWord = makeTeTa(word, chars);
         newWord = newWord.concat(addTa(word,chars));
         return newWord;
@@ -273,7 +274,7 @@ public class Conjugation {
      * @param chars The Japanese Characters dictionary.
      * @return The Ta form of the verb.
      */
-    public static String makeTa(String word, JapanCharacters chars) {
+    public static String getTa(String word, JapanCharacters chars) {
         String newWord = makeTeTa(word, chars);
         newWord = newWord.concat(addTe(word,chars));
         return newWord;

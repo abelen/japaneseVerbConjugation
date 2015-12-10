@@ -148,9 +148,12 @@ public class JapanPanel extends JPanel {
          */
 		private class TextListener implements ActionListener {
 			public void actionPerformed(ActionEvent event) {
+
+                // TODO: do the data validation.
+
 				jpnMasu.setText(Conjugation.masuForm(jpnText.getText(),chars));
-				jpnPast.setText(Conjugation.makeTe(jpnText.getText(), chars));
-				jpnTe.setText(Conjugation.makeTa(jpnText.getText(), chars));
+				jpnPast.setText(Conjugation.getTe(jpnText.getText(), chars));
+				jpnTe.setText(Conjugation.getTa(jpnText.getText(), chars));
 				jpnNeg.setText(Conjugation.getNegForm(jpnText.getText(), chars));
 				jpnNegPast.setText(Conjugation.getNegPastForm(jpnText.getText(), chars));
 				jpnPassive.setText(Conjugation.getPassive(jpnText.getText(), chars));

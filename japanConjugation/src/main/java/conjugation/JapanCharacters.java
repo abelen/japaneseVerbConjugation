@@ -5,20 +5,42 @@ package conjugation;
  * written language. 
  */
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 @Named
+@Singleton
 public class JapanCharacters {
-	
+
+    /* map that is used to map each Japanese ending letter to its conjugation patterns */
 	private HashMap<String, ArrayList<String>> dict;
 
+    /**
+     * Default constructor.
+     */
 	public JapanCharacters() {
 		dict = new HashMap<String, ArrayList<String>>();
 		populateDict(dict);
 	}
-	
+
+    /**
+     * Checks to see if the dictionary have been initialized.
+     */
+    @PostConstruct
+    public void init() {
+        if (dict == null) {
+            throw new IllegalStateException("The dictionary should be not null.");
+        }
+    }
+
+    /**
+     * Returns the dictionary of all the conjugation patterns.
+     *
+     * @return The dictionary of all the conjugation patterns.
+     */
 	public HashMap<String, ArrayList<String>> getDict() {
 		return dict;
 	}
