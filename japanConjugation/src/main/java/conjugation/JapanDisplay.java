@@ -14,7 +14,6 @@ public class JapanDisplay {
 	
 	public static void main(String[] args) throws IOException {
 
-        // TODO: Need to do data validation.
         // TODO: Add shutdown hook and postinitalization
         ApplicationContext context = new ClassPathXmlApplicationContext("configuration.xml");
 
