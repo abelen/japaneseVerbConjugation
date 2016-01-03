@@ -2,7 +2,6 @@ package conjugation;
 
 import java.awt.*;
 import java.awt.event.*;
-
 import java.io.IOException;
 
 import javax.inject.Inject;
@@ -125,16 +124,23 @@ public class JapanPanel extends JPanel {
         private class TextListener implements ActionListener {
             public void actionPerformed(ActionEvent event) {
                 if (DataValidator.validate(jpnText.getText())) {
-                    jpnMasu.setText(Conjugation.masuForm(jpnText.getText(), chars));
-                    jpnPast.setText(Conjugation.getTe(jpnText.getText(), chars));
-                    jpnTe.setText(Conjugation.getTa(jpnText.getText(), chars));
-                    jpnNeg.setText(Conjugation.getNegForm(jpnText.getText(), chars));
-                    jpnNegPast.setText(Conjugation.getNegPastForm(jpnText.getText(), chars));
-                    jpnPassive.setText(Conjugation.getPassive(jpnText.getText(), chars));
-                    jpnCausative.setText(Conjugation.getCausative(jpnText.getText(), chars));
-                    jpnPotentialForm.setText(Conjugation.getPotential(jpnText.getText(), chars));
-                    jpnTaiForm.setText(Conjugation.getTaiForm(jpnText.getText(), chars));
-                    jpnCondForm.setText(Conjugation.getConditional(jpnText.getText(), chars));
+                    // check to see if there's need to be translation from romaji.
+                    String newWord;
+                    if (DataValidator.getType() == DataValidator.Type.ROMAJI) {
+                        newWord = RomajiTranslation.translate(jpnText.getText());
+                    } else {
+                        newWord = jpnText.getText();
+                    }
+                    jpnMasu.setText(Conjugation.masuForm(newWord, chars));
+                    jpnPast.setText(Conjugation.getTe(newWord, chars));
+                    jpnTe.setText(Conjugation.getTa(newWord, chars));
+                    jpnNeg.setText(Conjugation.getNegForm(newWord, chars));
+                    jpnNegPast.setText(Conjugation.getNegPastForm(newWord, chars));
+                    jpnPassive.setText(Conjugation.getPassive(newWord, chars));
+                    jpnCausative.setText(Conjugation.getCausative(newWord, chars));
+                    jpnPotentialForm.setText(Conjugation.getPotential(newWord, chars));
+                    jpnTaiForm.setText(Conjugation.getTaiForm(newWord, chars));
+                    jpnCondForm.setText(Conjugation.getConditional(newWord, chars));
                 } else {
                     JOptionPane.showMessageDialog(null, "Word must be a Japanese verb written in Japanese characters");
                 }

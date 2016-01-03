@@ -14,6 +14,8 @@ public class DataValidator {
 
     private static Set<String> japaneseSet = new HashSet<String>();
 
+    private static Type type;
+
     static {
         populateRomajiSet();
         populateJapaneseSet();
@@ -21,11 +23,18 @@ public class DataValidator {
 
     public static boolean validate(String word) {
 
+        // no word should be only one character or less.
+        if (word.length() <= 1) {
+            return false;
+        }
+
         // check to see if there's japanese text first
-        if (validateJapanese(word)) {
+        if (validateRomaji(word)) {
+            type = Type.ROMAJI;
             return true;
         } else {
-            if (validateRomaji(word)) {
+            if (validateJapanese(word)) {
+                type = Type.JAPANESE;
                 return true;
             } else {
                 return false;
@@ -34,23 +43,31 @@ public class DataValidator {
     }
 
     public static boolean validateRomaji(String word) {
-        // go thru each character to see if it's in the set
 
-        char[] wordCharacters = word.toCharArray();
-        List<String> charList = new ArrayList<String>();
+        char lastCharacter = word.charAt(word.length() - 1);
+        if (lastCharacter == 'u') {
 
-        for (int i = 0; i < wordCharacters.length; i++) {
-            charList.add(Character.toString(wordCharacters[i]));
-        }
+            // go thru each character to see if it's in the set
+            char[] wordCharacters = word.toCharArray();
+            List<String> charList = new ArrayList<String>();
 
-        for (String s : charList) {
-            if (! (romajiSet.contains(s))) {
-                return false;
+            for (int i = 0; i < wordCharacters.length; i++) {
+                charList.add(Character.toString(wordCharacters[i]));
             }
-        }
-        return true;
 
-        // TODO: will need to further validate more, with letter combinations.
+            for (String s : charList) {
+                if (!(romajiSet.contains(s))) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static Type getType() {
+        return type;
     }
 
     /**
@@ -60,21 +77,6 @@ public class DataValidator {
      * @param word The word that needs to be validated.
      */
     public static boolean validateJapanese(String word) {
-
-        // checks to see all if the characters are japanese.
-        // split up the word into their characters.
-        char[] wordCharacters = word.toCharArray();
-        List<String> charList = new ArrayList<String>();
-
-        for (int i = 0; i < wordCharacters.length; i++) {
-            charList.add(Character.toString(wordCharacters[i]));
-        }
-
-        for (String s : charList) {
-            if (! (japaneseSet.contains(s))) {
-                return false;
-            }
-        }
 
         // check to see if it's a japanese.
         char lastCharacter = word.charAt(word.length() - 1);
@@ -96,6 +98,7 @@ public class DataValidator {
     private static void populateRomajiSet() {
         romajiSet.add("a");
         romajiSet.add("s");
+        romajiSet.add("e");
         romajiSet.add("i");
         romajiSet.add("u");
         romajiSet.add("o");
@@ -189,5 +192,9 @@ public class DataValidator {
         japaneseSet.add("ぴ");
         japaneseSet.add("ぽ");
         japaneseSet.add("ぺ");
+    }
+
+    public enum Type {
+        JAPANESE, ROMAJI
     }
 }
