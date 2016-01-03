@@ -124,7 +124,7 @@ public class JapanPanel extends JPanel {
          */
         private class TextListener implements ActionListener {
             public void actionPerformed(ActionEvent event) {
-                if (Conjugation.validateData(jpnText.getText())) {
+                if (DataValidator.validate(jpnText.getText())) {
                     jpnMasu.setText(Conjugation.masuForm(jpnText.getText(), chars));
                     jpnPast.setText(Conjugation.getTe(jpnText.getText(), chars));
                     jpnTe.setText(Conjugation.getTa(jpnText.getText(), chars));

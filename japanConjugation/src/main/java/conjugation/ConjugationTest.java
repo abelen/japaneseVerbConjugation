@@ -15,5 +15,7 @@ public class ConjugationTest {
 		assertEquals(Conjugation.masuForm("やめる", jpnChars), "やめます");
 		assertEquals(Conjugation.masuForm("たべる", jpnChars), "たべます");
 		assertEquals(Conjugation.masuForm("たべさせる", jpnChars), "たべます");
+
+		// TODO: check to see if the romaji translation works.
 	}
 }

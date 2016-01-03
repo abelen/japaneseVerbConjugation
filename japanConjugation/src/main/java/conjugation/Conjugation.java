@@ -48,7 +48,7 @@ public class Conjugation {
 	 * @return The negative form of the verb.
 	 */
 	public static String getNegForm(String word, JapanCharacters chars) {
-		String newWord = preNegForm(word,chars);
+		String newWord = preNegForm(word, chars);
 		newWord = newWord.concat("い");
 		return newWord;
 	}
@@ -276,7 +276,7 @@ public class Conjugation {
      */
     public static String getTa(String word, JapanCharacters chars) {
         String newWord = makeTeTa(word, chars);
-        newWord = newWord.concat(addTe(word,chars));
+        newWord = newWord.concat(addTe(word, chars));
         return newWord;
     }
 
@@ -433,26 +433,6 @@ public class Conjugation {
             }
             masuWord = masuWord.concat("な");
             return masuWord;
-        }
-    }
-
-    /**
-     * Validates the data to see if it's a japanese verb. If so, return true
-     * Otherwise, fail with a message.
-     *
-     * @param word
-     */
-    public static boolean validateData(String word) {
-        char lastCharacter = word.charAt(word.length() - 1);
-        if (lastCharacter == 'う' || lastCharacter == 'く' ||
-                lastCharacter == 'ぐ' || lastCharacter == 'る' ||
-                lastCharacter == 'つ' || lastCharacter == 'づ'||
-                lastCharacter == 'す' || lastCharacter == 'ず' ||
-                lastCharacter == 'ふ' || lastCharacter == 'ぶ' ||
-                lastCharacter == 'ぷ' || lastCharacter == 'む') {
-            return true;
-        } else {
-            return false;
         }
     }
 }
