@@ -24,40 +24,6 @@ public class JapanPanel extends JPanel {
     @Inject
     private JapanCharacters chars;
 
-    public JLabel getEnterLabel() {
-        return enterLabel;
-    }
-
-    public void setEnterLabel(JLabel enterLabel) {
-        this.enterLabel = enterLabel;
-    }
-
-    public JapanCharacters getChars() {
-        return chars;
-    }
-
-    public void setChars(JapanCharacters chars) {
-        this.chars = chars;
-    }
-
-    /**
-     * Returns the panel that will hold all the conjugations.
-     *
-     * @return
-     */
-    public ConjugationPanel getConjugationPanel() {
-        return conjugationPanel;
-    }
-
-    /**
-     * Sets the ConjugationPanel.
-     *
-     * @param conjugationPanel The ConjugationPanel
-     */
-    public void setConjugationPanel(ConjugationPanel conjugationPanel) {
-        this.conjugationPanel = conjugationPanel;
-    }
-
     /**
      * Default constructor.
      *

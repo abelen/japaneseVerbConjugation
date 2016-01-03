@@ -85,7 +85,7 @@ public class JapanCharacters {
 		gagu = addToList(gagu, "が", "ぎ", "ぐ", "げ", "ご");
 		dict.put("ぐ",gagu);
 		ArrayList<String> raru = new ArrayList<String>();
-		zazu = addToList(raru, "ら", "り", "る", "れ", "ろ");
+		addToList(raru, "ら", "り", "る", "れ", "ろ");
 		dict.put("る",raru);
 			
 		return dict;	

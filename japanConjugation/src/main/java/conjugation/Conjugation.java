@@ -455,5 +455,4 @@ public class Conjugation {
             return false;
         }
     }
-
 }
